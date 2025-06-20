@@ -77,15 +77,18 @@ for epoch in range(num_epochs):
     if (epoch+1) % 10 == 0:
         print(f'Interaction number: [{epoch+1}/{num_epochs}] Net error: {loss.item():.4f}')
 
-model.eval()
-while torch.no_grad():
-    outputs = model(x_test_tensor)
-    _, predicted = torch.max(outputs.data, dim=1)
+model.eval()                                                                            # Validation
+with torch.no_grad():                                                                 
+    outputs = model(x_test_tensor)                                                      #  output from model 
+    _, predicted = torch.max(outputs.data, dim=1)                                       #  Predict Value - return index
     _, y_test_labels = torch.max(y_test_tensor, dim=1)
     accuracy = (predicted == y_test_labels).sum().item() / y_test_labels.size(0)
     print(f'Accuracy of model on base tets data : correct: {accuracy * 100:.2f}%')
 
-# tourch.save(model, myModel.pth)
+#torch.save(model, 'myModel.pth')
+
+# Save only the state dictionary (weights)
+torch.save(model.state_dict(), "myModel.pth")
 
 # training_model = torch.load('myMOdel.pth')
 # outputs = trained_model(x_test_tensor)
