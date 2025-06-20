@@ -1,0 +1,7 @@
+# Ignore machine learning model files
+*.onnx
+*.pth
+
+# Ignore Python bytecode files in __pycache__ folders
+__pycache__/
+*.pyc
