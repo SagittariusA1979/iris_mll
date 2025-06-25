@@ -1,8 +1,20 @@
 # https://www.youtube.com/watch?v=PM8udzOFPEM
+# https://www.youtube.com/watch?v=Zykqd6lBa1M
+
+# loader the data from e.g. csv
+# clear - delete missing or wrong value data 
+# clear - outlier values data 
+# engineering of feature
+# normalization & standardization
+# and split 
 
 import tabulate
 
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import ( 
+    MinMaxScaler, 
+    StandardScaler,
+    LabelEncoder,
+)
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -49,11 +61,15 @@ df = pd.read_csv('ElVehicle.csv', sep=',', decimal='.')
 
 #df = df[df['valueToRemove'] >= 100]         # data which I can remowe
 #df['area'] = df['area'].apply(parse_area)   # apply
+
+#df =  df.sort_values(by='VIN (1-10)')
+#df.drop_duplicates(subset=['Electric'], keep='last', inplace=True)
+
 largest_ElectricRange = df.loc[df['Electric Range'].idxmax()]     # max value
 smallest_ElectricRange = df.loc[df['Electric Range'].idxmin()]    # min value
 
 
-# normalization & standardization [ engineering of feature ]
+# normalization & standardization  <--
 
 scalerA = MinMaxScaler()    # standarization
 charS = scalerA.fit_transform(df[['Electric Range', 'DOL Vehicle ID']])
@@ -83,16 +99,21 @@ axes[2].set_xlabel('Electric Range [NOR]')
 axes[2].set_ylabel('DOL Vehicle ID [NOR]')
 
 
+#plt.show()
 
-plt.show()
+# engineering of feature <-- (model test) 
+# propabli should be a make first, before normalization and serializtion
+
+label_Encoder = LabelEncoder()
+df['County_enc'] = label_Encoder.fit_transform(df['County'])
 
 
 
-#print(df.sample(10))
+
+print(df.sample(10))
 
 
-#df =  df.sort_values(by='VIN (1-10)')
-#df.drop_duplicates(subset=['Electric'], keep='last', inplace=True)
+
 
 
 

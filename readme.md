@@ -1,3 +1,13 @@
+<PIP>
+    pip install gymnasium
+    pip install "gymnasium[box2d]"
+</>
+
+<REQuirment>
+    pip freeze > requirements.txt
+    pip install -r requirements.txt
+</>
+
 <GIT>
     git rm --cached path/to/file.onnx
     git rm -r --cached __pycache__
