@@ -17,6 +17,7 @@ env = gym.make("LunarLander-v2")
 env.reset()
 
 
+
 OPTIMIZE_WITH_HARDWARE = False
 
 device = torch.device('cpu')
